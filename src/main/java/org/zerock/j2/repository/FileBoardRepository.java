@@ -11,7 +11,6 @@ import org.zerock.j2.repository.search.FileBoardSearch;
 public interface FileBoardRepository extends JpaRepository<FileBoard,Long>, FileBoardSearch {
 
     @Query("select b from FileBoard b where b.bno = :bno")
-
     @EntityGraph(attributePaths = {"images"})
     FileBoard selectOne(@Param("bno") Long bno);
 

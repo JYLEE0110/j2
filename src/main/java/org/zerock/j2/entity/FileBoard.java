@@ -44,6 +44,7 @@ public class FileBoard {
 
     //최대 20개의 bno를 일괄처리로 가져온다. 
     @BatchSize(size = 20)
+    // Cascade => PK를 가지고 있는 쪽의 값을 삭제하면. FK로 연결된 값이 동시에 삭제되게 하는 옵션
     @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "board")
     @Builder.Default

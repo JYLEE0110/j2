@@ -123,7 +123,7 @@ public class RepositoryTest {
     @Transactional
     @Test
     public void testDelete() {
-        Long bno = 102L;
+        Long bno = 99L;
 
         repository.deleteById(bno);
     }
@@ -133,7 +133,7 @@ public class RepositoryTest {
     @Test
     public void testUpdate() {
 
-        Optional<FileBoard> result = repository.findById(101L);
+        Optional<FileBoard> result = repository.findById(99L);
 
         FileBoard board = result.orElseThrow();
 
@@ -147,6 +147,12 @@ public class RepositoryTest {
 
         // image 추가
         board.addImage(img1);
+
+        // JPA 에서 자식엔티티의 수정은 insert update update delete 순으로 이어지는데
+        // 변경된 자식을 먼저 insert 하고
+        // 기존의 자식을 NULL로 update 한다.
+        // 그리고 orphanRemoval 옵션을 true 로 하면 기존 NULL처리된 자식을 DELETE 한다.
+        // PK(JoinColumn)값이 NULL로 변한 자식은 고아객체라고 하여 연결된 점이 없는 객체이다.
 
         repository.save(board);
 
