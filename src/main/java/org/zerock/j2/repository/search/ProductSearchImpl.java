@@ -14,7 +14,7 @@ import org.zerock.j2.entity.QProduct;
 import org.zerock.j2.entity.QProductImage;
 import org.zerock.j2.entity.QProductReview;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Projection;
+
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 
@@ -79,6 +79,8 @@ public class ProductSearchImpl extends QuerydslRepositorySupport implements Prod
 
         // group by X ord가 0인값만 가져오게 함 => 썸네일
         query.where(productImage.ord.eq(0));
+        // del이 false인 값만 게시물에 출력
+        query.where(product.delFlag.eq(Boolean.FALSE));
 
         int pageNum = pageRequestDTO.getPage() <= 0 ? 0 : pageRequestDTO.getPage()-1;
 

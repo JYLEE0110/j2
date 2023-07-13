@@ -1,14 +1,16 @@
 package org.zerock.j2.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import lombok.Data;
-import lombok.ToString;
 
 @Data
 @ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDTO {
     
     // Entity랑 맞춘다.
@@ -22,9 +24,12 @@ public class ProductDTO {
     private int price;
 
     // DB에 저장하려고
-    private List<String> images;
+
+    @Builder.Default
+    private List<String> images = new ArrayList<>();
 
     // 등록 / 수정 시 업로드된 파일 데이터를 수집하는 용도
-    private List<MultipartFile> files;
+    @Builder.Default
+    private List<MultipartFile> files = new ArrayList<>();
 
 }

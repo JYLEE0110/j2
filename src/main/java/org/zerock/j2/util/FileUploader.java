@@ -32,6 +32,30 @@ public class FileUploader {
     @Value("${org.zerock.upload.path}")
     private String path;
 
+    public void removeFiles(List<String> fileNames){
+
+        if(fileNames == null || fileNames.size() == 0) {
+
+            return;
+        }
+
+        // 예외처리 때문에 람다식으로 X
+        // 파일을 삭제 할 경우
+        for(String fname :fileNames){
+
+            // 원본파일
+            File original = new File(path, fname);
+            File thumb = new File(path, "s_"+fname);
+
+            // 썸네일이 존재한다면 => 사진을 경우
+            if(thumb.exists()){
+                thumb.delete();
+            }
+            original.delete();
+        }
+
+    }
+
     public List<String> uploadFiles(List<MultipartFile> files, boolean makeThumbnail) {
 
         if (files == null || files.size() == 0) {
@@ -71,7 +95,7 @@ public class FileUploader {
 
                     File thumbOutFile = new File(path, "s_" + saveFileName);
 
-                    Thumbnailator.createThumbnail(saveFile, thumbOutFile, 100, 100);
+                    Thumbnailator.createThumbnail(saveFile, thumbOutFile, 200, 200);
                 }
 
                 uploadFileNames.add(saveFileName);
@@ -85,4 +109,5 @@ public class FileUploader {
         return uploadFileNames;
 
     }
+
 }

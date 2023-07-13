@@ -35,6 +35,8 @@ public class Product {
 
     private int price;
 
+    private boolean delFlag;
+
     // @Embeded 선언된 클래스와 매핑된다.
     // @EntityGraph 한번에 가져온다. Image 가져오는 query문 따로 안날아간다.
     @ElementCollection(fetch = FetchType.LAZY)
@@ -56,5 +58,9 @@ public class Product {
     public void changePrice(int price){
         this.price = price;
     }
-    
+
+    public void changePname(String pname){ this.pname = pname;}
+    public void changePdesc(String pdesc){ this.pdesc = pdesc;}
+    public void changeDelflag(boolean delFlag){ this.delFlag = delFlag;}
+
 }
