@@ -31,9 +31,11 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    // 이미지 처리 부분이 달라서 modelMapper안쓰고 Builder사용
     @Override
     public Long register(ProductDTO productDTO) {
-
+        
+        // DTO로 받은 값을 Entity에 넣고 save
         Product product = Product.builder()
         .pname(productDTO.getPname())
         .pdesc(productDTO.getPdesc())
@@ -67,8 +69,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void remove(Long pno) {
 
+        // 기존 상품데이터를 가져온다.
         Product product = productRepository.selectOne(pno);
 
+        // delFlag를 true로 만들어서 리스트 보여줄때 false인 값만 보여주게 설계
         product.changeDelflag(true);
 
         productRepository.save(product);
@@ -77,6 +81,7 @@ public class ProductServiceImpl implements ProductService {
                 product.getImages().stream().map(pi -> pi.getFname()).collect(Collectors.toList());
 
 
+        // webServer(nginX)에 있는 파일을 지운다.
         fileUploader.removeFiles(fileNames);
     }
 
