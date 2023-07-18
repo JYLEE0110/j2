@@ -17,9 +17,9 @@ public class MemberTests {
     public void testInsert(){
 
         Member  member = Member.builder()
-                .email("user00@aaa.com")
+                .email("wndyd0110@naver.com")
                 .pw("1111")
-                .nickname("USER00")
+                .nickname("이주용")
                 .build();
 
         memberRepository.save(member);
