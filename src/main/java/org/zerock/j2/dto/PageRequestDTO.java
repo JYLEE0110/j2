@@ -11,12 +11,12 @@ public class PageRequestDTO {
 
     private int page = 1;
 
-    private int size = 10;
+    private int size = 12;
 
     private String type, keyword;
 
     public PageRequestDTO() {
-        this(1, 10);
+        this(1, 12);
     }
 
     public PageRequestDTO(int page, int size) {
@@ -29,7 +29,7 @@ public class PageRequestDTO {
     public PageRequestDTO(int page, int size, String type, String keyword) {
 
         this.page = page <= 0 ? 1 : page;
-        this.size = size < 0 || size >= 100 ? 10 : size;
+        this.size = size < 0 || size >= 100 ? 12 : size;
         this.type = type;
         this.keyword = keyword;
     }
@@ -40,7 +40,7 @@ public class PageRequestDTO {
 
     public void setSize(int size){
 
-        this.size = size < 0 || size >= 100 ? 10 : size;
+        this.size = size < 0 || size >= 100 ? 12 : size;
 
     }
 
